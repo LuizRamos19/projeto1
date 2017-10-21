@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 /**
  * Esta classe registra as informações das empresas que estao autorizadas
  * a oferecer estagio para alunos
- * @author professor
+ * @author Luiz Ramos
  * @version 1.0
  *
  */
@@ -34,8 +34,14 @@ public class Empresa {
 		return nomeDaEmpresa;
 	}
 
-	public void setNomeDaEmpresa(String nomeDaEmpresa) {
-		this.nomeDaEmpresa = nomeDaEmpresa;
+	public String setNomeDaEmpresa(String nomeDaEmpresa) {
+		String msg="";
+		if(emValido(nomeDaEmpresa)){
+			this.nomeDaEmpresa = nomeDaEmpresa;
+		}else{
+			msg = "Empresa invalida.";
+		}
+		return msg;
 	}
 
 	public String getNomeFantasia() {
@@ -64,6 +70,17 @@ public class Empresa {
 	/*
 	 * valida o cnpj
 	 */
+	
+	//função para verificação do nome em branco da empresa
+	public boolean emValido(String nome) {
+		boolean bool = true;
+		if (nome.equals("")) {
+			bool = false;
+		}
+		return bool;
+	}
+	//
+	
 	public boolean isValido(String cnpj) {
 		char dig13, dig14; 
 		int sm, i, r, num, peso;

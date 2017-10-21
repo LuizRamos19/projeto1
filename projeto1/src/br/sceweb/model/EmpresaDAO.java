@@ -9,7 +9,7 @@ import br.sceweb.servico.FabricaDeConexoes;
 
 /**
  * Esta classe registra as informações de empresas que podem oferecer estagio para alunos
- * @author Lab103
+ * @author Luiz Ramos
  * @version 1
  *
  */

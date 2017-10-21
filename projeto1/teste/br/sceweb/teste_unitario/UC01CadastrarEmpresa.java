@@ -17,7 +17,7 @@ import br.sceweb.model.EmpresaDAO;
 import br.sceweb.servico.ConfiguraDB;
 /**
  * Este script de teste verifica o comportamento do caso de uso UC01CadastrarEmpresa
- * @author professor
+ * @author Luiz Ramos
  *
  */
 public class UC01CadastrarEmpresa {
@@ -30,7 +30,7 @@ public class UC01CadastrarEmpresa {
 		String url = "jdbc:mysql://localhost/sceweb";
 		String driver = "com.mysql.jdbc.Driver";
 		String usuario = "root";
-		String senha = "alunofatec";
+		String senha = "root";
 		configuraDB = new ConfiguraDB(url, driver,usuario,senha);
 		empresaDAO = new EmpresaDAO(configuraDB);
 		empresa = new Empresa();
@@ -49,7 +49,7 @@ public class UC01CadastrarEmpresa {
 	@Test
 	public void CT01UC01FBCadastra_com_sucesso() {
 		String url = "jdbc:mysql://localhost/sceweb";
-		assertEquals(1,empresaDAO.adiciona(empresa));
+		assertEquals(1,empresaDAO.adiciona(empresa)); //esse valor de adiciona, retorna 1, por isso compara-se com o primeiro 1
 	}
 	
 	@Test
@@ -61,8 +61,20 @@ public class UC01CadastrarEmpresa {
 	public void CT03UC01FBCadastra_cnpj_ja_cadastrado() {
 		empresaDAO = new EmpresaDAO(configuraDB);
 		empresaDAO.adiciona(empresa);
-		assertEquals(0,empresaDAO.adiciona(empresa));
+		assertEquals(0,empresaDAO.adiciona(empresa)); //esse valor de adiciona, retorna 1 ou 0, dependendo se adicionou ou não, por isso compara-se com o primeiro 1
 		
+	}
+	
+	@Test
+	public void CT04UC01FBCadastra_empresa_em_branco() {
+		empresaDAO = new EmpresaDAO(configuraDB);
+		assertEquals("Empresa invalida.",empresa.setNomeDaEmpresa(""));
+	}
+	
+	@Test
+	public void CT05UC01FBCadastra_cnpj_em_branco() {
+		empresaDAO = new EmpresaDAO(configuraDB);
+		assertEquals("CNPJ invalido.",empresa.setCnpj(""));
 	}
 	
 	@After
